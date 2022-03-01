@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose')
 const cors = require('cors');
+const userRoutes = require('./routes/user.routes');
+const listingRoutes = require('./routes/listing.routes');
 
 require('dotenv').config();
 
@@ -18,6 +20,9 @@ connection.once('open', () => {
 
 app.use(cors());
 app.use(express.json());
+
+app.use('/users', userRoutes)
+app.use('/listings')
 
 app.listen(port, () => {
     console.log(`Server is running in http://localhost:${port}`);

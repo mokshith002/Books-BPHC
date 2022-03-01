@@ -1,0 +1,6 @@
+/register -> Add a new user
+
+/users -> View all users
+
+/users/profile/id -> View user with given id
+

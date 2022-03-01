@@ -8,8 +8,8 @@ const listingSchema = new Schema({
         type: String,
         required: true
     },
-    seller: {
-        type: User,
+    sellerId: {
+        type: String,
         required: true,
     },
     branches: [String],
