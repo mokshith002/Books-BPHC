@@ -1,6 +1,6 @@
 let User = require('../models/user.model')
 
-export const getAllusers = (req, res) => {
+exports.getAllusers = (req, res) => {
     User.find()
         .then(users => res.send(users))
         .catch(err => res.status(400).send({
@@ -8,7 +8,12 @@ export const getAllusers = (req, res) => {
         }))
 }
 
-export const addUser = (req, res) => {
+exports.addUser = (req, res) => {
+
+    if (!req.body) {
+        res.status(400).send({ message: "Cannot be empty!" });
+        return;
+    }
 
     const { email, phone, address } = req.body;
 
@@ -24,30 +29,60 @@ export const addUser = (req, res) => {
         .catch(err => res.status(400).send({ message: err.message || "Error adding User" }));
 }
 
-export const editUser = (req, res) => {
+exports.findUser = (req, res) => {
     const id = req.params.id;
-    const { email, phone, address } = req.body;
     User.findById(id)
-        .then(user => {
-            user = {
-                ...user,
-                email,
-                phone,
-                address
-            };
-            user.save()
-                .then((data) => res.send(data))
-                .catch(err => res.status(400).send({ message: err.message || "Error editing user" }))
+        .then((data) => {
+            if (!data) {
+                res.status(404).send({
+                    message: "User not found"
+                })
+            } else {
+                res.send(data);
+            }
         })
-        .catch(err => res.status(400).send({
-            message: err.message || "Error finding user"
-        }))
+        .catch(err => res.status(500).send({
+            message: err.message || "Error occurred when finding for user"
+        }));
 }
 
-export const deleteUser = (req, res) => {
+exports.editUser = (req, res) => {
+
+    if (!req.body) {
+        res.status(400).send({ message: "Cannot be empty" });
+        return;
+    }
+
+    const id = req.params.id;
+    User.findByIdAndUpdate(id, req.body, {
+            useFindAndModify: false
+        })
+        .then((data) => {
+            if (!data) {
+                res.status(400).send({ message: "Cannot update user maybe user is not found" })
+            } else {
+                res.send(data)
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Error updating user"
+            })
+        })
+}
+
+exports.deleteUser = (req, res) => {
     const id = req.params.id;
 
     User.findByIdAndDelete(id)
-        .then((data) => res.send(data))
-        .catch(err => res.status(400).send({ message: err.message || "Error deleting user" }));
+        .then(data => {
+            if (!data) {
+                res.status(404).send({ message: "Cannot delete this user" })
+            } else {
+                res.send(data);
+            }
+        })
+        .catch(err => res.status(500).send({
+            message: err.message || "Error occurred while deleting this user"
+        }))
 }

@@ -1,7 +1,6 @@
-import { Schema as _Schema, model } from 'mongoose';
-import User from './user.model';
+const mongoose = require('mongoose');
 
-const Schema = _Schema;
+const Schema = mongoose.Schema;
 
 const listingSchema = new Schema({
     title: {
@@ -20,6 +19,6 @@ const listingSchema = new Schema({
     }
 });
 
-const Listing = model('Listing', listingSchema);
+const Listing = mongoose.model('Listing', listingSchema);
 
-export default Listing;
+module.exports = Listing;

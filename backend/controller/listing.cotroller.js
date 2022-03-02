@@ -1,12 +1,12 @@
 let Listing = require('../models/listing.model')
 
-export const getAllListings = (req, res) => {
+exports.getAllListings = (req, res) => {
     Listing.find()
         .then((listings) => res.send(listings))
         .catch(err => res.send({ message: err.message || "Error retrieving listings" }));
 }
 
-export const addListing = (req, res) => {
+exports.addListing = (req, res) => {
 
     if (!req.body) {
         res.status(400).send({ message: "Cannot be empty!" });
@@ -25,12 +25,28 @@ export const addListing = (req, res) => {
 
     newListing.save(newListing)
         .then(data => res.send(data))
-        .catch(err > res.status(500).send({
+        .catch(err => res.status(500).send({
             message: err.message || "Error adding Listing"
         }));
 }
 
-export const editListing = (req, res) => {
+exports.findListing = (req, res) => {
+    const id = req.params.id;
+    Listing.findById(id)
+        .then(data => {
+            if (!data) {
+                res.status(404).send({ message: "This listing cannot be found" });
+
+            } else {
+                res.send(data);
+            }
+        })
+        .catch(err => res.status(500).send({
+            message: err.message || "Error while retrieving listing"
+        }))
+}
+
+exports.editListing = (req, res) => {
     if (!req.body) {
         res.status(400).send({ message: "Cannot be empty" });
         return;
@@ -52,4 +68,19 @@ export const editListing = (req, res) => {
                 message: err.message || "Error updating user"
             })
         })
+}
+
+exports.deleteListing = (req, res) => {
+    const id = req.params.id;
+    Listing.findByIdAndDelete(id)
+        .then(data => {
+            if (!data) {
+                res.status(404).send({ message: "Cannot delete this listing" })
+            } else {
+                res.send(data);
+            }
+        })
+        .catch(err => res.status(500).send({
+            message: err.message || "Error occurred while deleting this listing"
+        }))
 }

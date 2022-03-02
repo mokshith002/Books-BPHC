@@ -21,8 +21,8 @@ connection.once('open', () => {
 app.use(cors());
 app.use(express.json());
 
-app.use('/users', userRoutes)
-app.use('/listings')
+app.use('/users', userRoutes);
+app.use('/listings', listingRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running in http://localhost:${port}`);
