@@ -13,10 +13,11 @@ exports.addListing = (req, res) => {
         return;
     }
 
-    const { title, sellerId, branches, courses, price } = req.body;
+    const { title, author, sellerId, branches, courses, price } = req.body;
 
     const newListing = new Listing({
         title,
+        author,
         sellerId,
         branches,
         courses,

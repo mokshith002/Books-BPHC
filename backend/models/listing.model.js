@@ -7,6 +7,7 @@ const listingSchema = new Schema({
         type: String,
         required: true
     },
+    author: String,
     sellerId: {
         type: String,
         required: true,
