@@ -1,14 +1,14 @@
 import React from 'react';
+import NavBar from './components/navBar';
 import ListingsTable from './components/ListingsTable'
 
 function App() {
-  return (
-    <div className="App">
-      <h1>
+    return ( 
+        <div className = "App" >
+        <NavBar />
         <ListingsTable />
-      </h1>
-    </div>
-  );
+        </div>
+    );
 }
 
 export default App;
