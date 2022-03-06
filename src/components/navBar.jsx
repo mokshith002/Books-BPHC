@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function NavBar() {
+
+    const logout = () => {
+      localStorage.setItem('userId', null);
+      window.location.href("http://localhost:3000");
+    }
+
     return (
 
-    <div>
+    <div>  
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Books-BPHC</a>
@@ -24,19 +30,17 @@ export default function NavBar() {
             </li>
           </ul>
           <span class="navbar-text">  
-            <a class="nav-link" href="#">Profile</a>
+            { localStorage.getItem('userId') ? 
+                <a class="nav-link" onClick={logout}>Logout</a>
+                : <a class="nav-link" href="http://localhost:3000/logiin">Login</a>
+            }
           </span>
         </div>
       </div>
     </nav>
-
-
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-3"></div>
-            <div class="col-3"></div>
-            <div class="col-3"></div>
-        </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 
     </div>
 

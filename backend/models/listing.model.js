@@ -12,8 +12,8 @@ const listingSchema = new Schema({
         type: String,
         required: true,
     },
-    branches: [String],
-    courses: [String],
+    branches: String,
+    courses: String,
     price: {
         type: Number,
         required: true

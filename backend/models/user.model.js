@@ -26,6 +26,10 @@ const userSchema = new Schema({
         unique: true,
         validator: [isMobile, 'Invalid Mobile Number']
     },
+    password: {
+        type: String,
+        required: true,
+    },
     role: {
         type: String,
         required: true,

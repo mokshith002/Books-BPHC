@@ -13,8 +13,8 @@ export default function Card(props) {
                     <h5 className="card-title">{title}</h5>
                     <p className="card-author">{author} </p>
                     <p className="card-price">{`₹${price}`} </p>
-                    <p className="card-courses">{courses.map(x=>"["+x+"] ")} </p>
-                    <p className="card-branches">{branches.map(x=>"("+x+") ")} </p>
+                    <p className="card-courses">{courses} </p>
+                    <p className="card-branches">{branches} </p>
                     <a href={link} className="btn btn-primary mt-auto align-self-start">Go to Page</a>
                 </div>
             </div>

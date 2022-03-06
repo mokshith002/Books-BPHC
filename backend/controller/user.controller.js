@@ -1,6 +1,7 @@
 let User = require('../models/user.model')
+const bcrypt = require('bcrypt')
 
-exports.getAllusers = (req, res) => {
+exports.getAllusers = async (req, res) => {
     User.find()
         .then(users => res.send(users))
         .catch(err => res.status(400).send({
@@ -8,28 +9,67 @@ exports.getAllusers = (req, res) => {
         }))
 }
 
-exports.addUser = (req, res) => {
+exports.login = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+      const oldUser = await User.findOne({ email });
+  
+      if (!oldUser) return res.status(200).json({ success: false });
+  
+      const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
+  
+      if (!isPasswordCorrect) return res.status(200).json({ success: false });
+      res.status(200).send({success: true, userID: 1001});
+    } catch (err) {
+        console.log(err);
+      res.status(500).json({ message: "Something went wrong" });
+    }
+}
+
+exports.register = async (req, res) => {
 
     if (!req.body) {
         res.status(400).send({ message: "Cannot be empty!" });
         return;
     }
 
-    const { email, phone, address } = req.body;
+    const { email, phone, address, password } = req.body;
+
+    let oldUser = null;
+
+    await User.findOne({email})
+        .then(data => {
+            oldUser = data;
+        });
+
+    if(oldUser){
+        return  res.status(200).send({success: false, message: "User already exists!"});
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+
 
     const newUser = new User({
         email,
         phone,
         role: "User",
-        address
+        address,
+        password: hashedPassword
     });
 
     newUser.save()
-        .then((data) => res.send(data))
-        .catch(err => res.status(400).send({ message: err.message || "Error adding User" }));
+        .then((data) => {
+            // console.log(data);
+            return res.send({...data,success:true});
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).send({ message: err.message || "Error adding User" })
+        });
 }
 
-exports.findUser = (req, res) => {
+exports.findUser = async (req, res) => {
     const id = req.params.id;
     User.findById(id)
         .then((data) => {
@@ -46,7 +86,7 @@ exports.findUser = (req, res) => {
         }));
 }
 
-exports.editUser = (req, res) => {
+exports.editUser = async (req, res) => {
 
     if (!req.body) {
         res.status(400).send({ message: "Cannot be empty" });
@@ -71,7 +111,7 @@ exports.editUser = (req, res) => {
         })
 }
 
-exports.deleteUser = (req, res) => {
+exports.deleteUser = async (req, res) => {
     const id = req.params.id;
 
     User.findByIdAndDelete(id)
