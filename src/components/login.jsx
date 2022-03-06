@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import LoginForm from './loginform';
 import RegisterForm from './registerform';
-export default function Login(params) {
+export default function Login(props) {
+
     return(
         <div class='row p-3'>
-            
+
             <div className='col'>
-                <LoginForm />
+                <LoginForm/>
             </div>
             <div className='col'>
                 <RegisterForm />

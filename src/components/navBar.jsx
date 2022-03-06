@@ -1,11 +1,30 @@
 import React, { Component } from 'react';
+import {Navigate} from 'react-router-dom';
 
-export default function NavBar() {
+export default function NavBar(props) {
 
-    const logout = () => {
-      localStorage.setItem('userId', null);
-      window.location.href("http://localhost:3000");
-    }
+    const localURL = "http://localhost:3000";
+
+    const logButt = () => {
+      if(localStorage.getItem('userId') != undefined){
+        return (
+          <button class="btn" onClick={()=>{
+            localStorage.removeItem('userId');
+            window.location.href = localURL;
+          }}>
+            LOGOUT
+          </button>
+        );
+      }else{
+        return (
+          <button class="btn" onClick={()=>{
+            window.location.href = localURL+"/login";
+          }}>
+            LOGIN
+          </button>
+        );
+      }
+    };
 
     return (
 
@@ -13,27 +32,24 @@ export default function NavBar() {
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Books-BPHC</a>
+        <a class="navbar-brand" href={localURL}>Books-BPHC</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href={localURL}>Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
+              <a class="nav-link" href={`${localURL}/search`}>Search</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
+              <a class="nav-link" href={`${localURL}/listings`}>All Listings</a>
             </li>
           </ul>
-          <span class="navbar-text">  
-            { localStorage.getItem('userId') ? 
-                <a class="nav-link" onClick={logout}>Logout</a>
-                : <a class="nav-link" href="http://localhost:3000/logiin">Login</a>
-            }
+          <span class="navbar-text"> 
+              {logButt()}
           </span>
         </div>
       </div>

@@ -1,14 +1,11 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-export default function LoginForm(params) {
-
-    const verifyLogin = () => {
-
-    }
+export default function LoginForm(props) {
 
     const URL = `http://localhost:${5000}`;
 
     const submitLogin = () => {
+        // event.preventDefault();
         let Email =  document.getElementById("logMail").value;
         let Pass = document.getElementById("logPass").value;
         axios.post(`${URL}/users/login`,{email:Email,password:Pass})
