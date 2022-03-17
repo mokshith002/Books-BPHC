@@ -30,28 +30,38 @@ export default function RegisterForm(params) {
     }
 
     return (
-        <div class="card-body bg-secondary m-3">
-            <h2>Register</h2>
-            {/* <form action="" method='post'>
-                <input type="text" name="regMail"></input><br />
-                Email<br /><br />
-                <input type="password" name="regPass1"></input><br />
-                Password<br /><br />
-                <input type="password" name="regPass2"></input><br />
-                Confirm Password<br /><br />
-                <input type="submit" value="Submit"></input>
-            </form> */}
-            <input type="text" id="regMail"></input><br />
-            Email<br /><br />
-            <input type="text" id="regPhone"></input><br />
-            Phone<br /><br />
-            <input type="text" id="regAddr"></input><br />
-            Address<br /><br />
-            <input type="password" id="regPass1"></input><br />
-            Password<br /><br />
-            <input type="password" id="regPass2"></input><br />
-            Confirm Password<br /><br />
-            <button onClick={submitRegister}>Submit</button>
+        <div class="flex-shrink">
+         <form>
+                <div class="row"> <h2>Register</h2> </div>
+                <div class="mb-3">
+                    <label for="inputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="regMail" />
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone number</label>
+                    <input type="tel" class="form-control" id="regPhone" />
+                </div>
+
+                 <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="regAddr" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="regPass1" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="passowrd" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="regPass2" />
+                </div>
+              
+                <button type="submit" class="btn btn-primary" onClick={submitRegister} >Submit</button>
+            </form> 
+
         </div>
     );
 };

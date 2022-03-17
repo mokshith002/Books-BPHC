@@ -7,8 +7,25 @@ const EditBookForm = ()=> {
 
   const URL = `http://localhost:${5000}`;
 
+  const ID = useParams().id;
+
+  let currentListing = null;
   const [formData, setFormData] = useState({title: "", author: "", courses: "", price: 0, branches: ""});
+  const abc = async () => {
+    const res = await axios.get(`${URL}/listings/${ID}`,{
+      headers:{
+        "Access-Control-Allow-Origin":`${URL}`
+      }
+    })
+   
+    currentListing = res.data;
   
+    console.log(currentListing);
+    setFormData(currentListing);
+  }
+  useEffect(()=>{
+    abc();
+  }, [])
 
   const coursesList = ["", "CS F111", "CS F211", "CS F214", "ECE F111", "ECE F211", "ECE F214", "ME F111", "ME F241", "MATH F111", "MATH F211"];
 
@@ -29,7 +46,7 @@ const EditBookForm = ()=> {
   const handleSubmit = async (event) =>{
     event.preventDefault();
     console.log(formData);
-    await axios.post(`${URL}/listings/add`, ({
+    await axios.put(`${URL}/listings/update/${ID}`, ({
       ...formData,
       sellerId: localStorage.getItem('userId')
     }));
@@ -40,9 +57,9 @@ const EditBookForm = ()=> {
     return (
 
          <div class="container p-5">
-          
-          <div class="row text-center">
-                <h2 class="">Add Book</h2>
+
+        <div class="row text-center">
+                <h2 class="">Edit Listing</h2>
             </div>
 
     <form onSubmit={handleSubmit}>
