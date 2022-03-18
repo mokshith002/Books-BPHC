@@ -126,3 +126,4 @@ exports.deleteUser = async (req, res) => {
             message: err.message || "Error occurred while deleting this user"
         }))
 }
+

@@ -85,3 +85,15 @@ exports.deleteListing = (req, res) => {
             message: err.message || "Error occurred while deleting this listing"
         }))
 }
+
+exports.myListings = async (req, res) => {
+    const id = req.body.Id;
+    console.log("Error retrieving listings of user with userId " + id);
+    Listing.find({sellerId: id})
+    .then(data => {
+        res.send(data);
+    })
+    .catch(err => res.status(500).send({ 
+        message: "Error occured while retrieving listings"
+    }))
+}

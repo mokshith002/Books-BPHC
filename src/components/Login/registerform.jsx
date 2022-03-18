@@ -60,6 +60,7 @@ export default function RegisterForm(params) {
                 </div>
               
                 <button type="submit" class="btn btn-primary" onClick={submitRegister} >Submit</button>
+                <div id="emailHelp" class="form-text">Already have an account? Login <a href='/login'>here</a>.</div>
             </form> 
 
         </div>

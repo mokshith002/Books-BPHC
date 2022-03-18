@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios';
 import {Navigate, useNavigate} from 'react-router-dom';
@@ -8,9 +8,7 @@ export default function Card(props) {
 
     const URL = `http://localhost:${3000}/listings`;
     const URL1 = `http://localhost:${5000}/listings`;
-
-    let navigate = useNavigate();
-
+    
     const links = {
         goTo: `${listingId}`,
         edit: `edit/${listingId}`
@@ -27,7 +25,7 @@ export default function Card(props) {
     }
 
     function handleNavigate(url){
-        navigate(`./${url}`);
+        window.location.href = `${URL}/${url}`;
     }
 
     return (

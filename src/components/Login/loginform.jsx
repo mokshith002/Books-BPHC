@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-export default function LoginForm(props) {
+
+export default function LoginForm() {
 
     const URL = `http://localhost:${5000}`;
 
     const submitLogin = () => {
-        // event.preventDefault();
         let Email = document.getElementById("logMail").value;
         let Pass = document.getElementById("logPass").value;
         axios.post(`${URL}/users/login`, { email: Email, password: Pass })
@@ -43,6 +43,7 @@ export default function LoginForm(props) {
                 </div>
               
                 <button type="submit" class="btn btn-primary">Submit</button>
+                <div id="emailHelp" class="form-text">Don't have an account? Register <a href='/register'>here</a>.</div>
             </form> 
 
     );

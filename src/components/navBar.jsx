@@ -47,6 +47,9 @@ export default function NavBar(props) {
             <li class="nav-item">
               <a class="nav-link" href={`${localURL}/listings`}>All Listings</a>
             </li>
+            <li class="nav-item">
+              {localStorage.getItem('userId') && <a class="nav-link" href={`${localURL}/listings/my-listings`}>My Listings</a>}
+            </li>
           </ul>
           <span class="navbar-text"> 
               {logButt()}

@@ -20,6 +20,10 @@ const userSchema = new Schema({
         unique: true,
         validator: [isEmail, 'Invalide Email']
     },
+    name: {
+        type: String,
+        required: true
+    },
     phone: {
         type: String,
         required: true,

@@ -21,9 +21,7 @@ const EditBookForm = ()=> {
     })
    
     currentListing = res.data;
-  
-    // console.log(currentListing.sellerId);
-    setFormData(currentListing);
+      setFormData(currentListing);
   }
 
   useEffect(()=>{

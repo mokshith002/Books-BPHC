@@ -14,7 +14,9 @@ import Login from './components/Login/login';
 import Test from './components/Test';
 import AddBook from './components/Books/AddBook';
 import Register from './components/Login/register';
-import EditBook from './components/Books/EditBook'
+import EditBook from './components/Books/EditBook';
+import MyListings from './components/Books/Listings/MyListings';
+import AllUsers from './components/Users/AllUsers';
 
 
 function App() {
@@ -31,8 +33,10 @@ function App() {
                 <Route path = "/register" element={<Register />}/>
                 <Route path = "/search" element={<Search />} />
                 <Route path = "/listings/edit/:id" element={<EditBook />} />
-                <Route path = "/test" element={<Test />} />
+                {/* <Route path = "/test" element={<AllUsers />} /> */}
                 <Route path = "/listings/add" element={<AddBook/>} />
+                <Route path = "/listings/my-listings" element={<MyListings />} />
+                <Route path = "/users" element={<AllUsers />} />
             </ Routes>
         </div>
     );
