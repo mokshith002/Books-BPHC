@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios';
-import {Navigate} from 'react-router-dom';
+import {Navigate, useNavigate} from 'react-router-dom';
 
 export default function Card(props) {
     const {title, author, courses, branches, price, listingId, sellerId} = props;
@@ -9,9 +9,11 @@ export default function Card(props) {
     const URL = `http://localhost:${3000}/listings`;
     const URL1 = `http://localhost:${5000}/listings`;
 
+    let navigate = useNavigate();
+
     const links = {
-        goTo: `${URL}/${listingId}`,
-        edit: `${URL}/edit/${listingId}`
+        goTo: `${listingId}`,
+        edit: `edit/${listingId}`
     }
 
     const handleDelete =async  () => {
@@ -22,6 +24,10 @@ export default function Card(props) {
             alert(error.message)
         }
         <Navigate to="/listings"/>
+    }
+
+    function handleNavigate(url){
+        navigate(`./${url}`);
     }
 
     return (
@@ -37,10 +43,10 @@ export default function Card(props) {
                     <p className="card-courses">{courses} </p>
                     <p className="card-branches">{branches} </p>
                     <div>
-                        <a href={links.gotTo} className="btn btn-success mt-auto align-self-start">Go to Page</a>
+                        <button className="btn btn-success mt-auto align-self-start"onClick={() => handleNavigate(links.goTo)}>Go to Page</button>
                         {   sellerId === localStorage.getItem('userId') &&
                             <span>
-                                <a href={links.edit} className="btn btn-primary mt-auto align-self-start ms-5" >Edit</a>
+                                <button className="btn btn-primary mt-auto align-self-start ms-5" onClick={() => handleNavigate(links.edit)}>Edit</button>
                                 <button onClick={handleDelete} className="btn btn-danger mt-auto align-self-end ms-5">Delete</button>
                             </span>
                         }

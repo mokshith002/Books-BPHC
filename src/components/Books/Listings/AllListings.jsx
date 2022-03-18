@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
-import Card from './card';
-import CardHolder from './cardholder'
+import Card from '../Cards/card';
+import CardHolder from '../Cards/cardholder'
 
 export default function AllListings(){
     const [cards, setCards] = React.useState([]);

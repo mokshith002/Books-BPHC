@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import Card from './card'
-import CardHolder from './cardholder';
+import Card from '../Cards/card'
+import CardHolder from '../Cards/cardholder';
 
 export default function Search() {
   

@@ -1,8 +1,8 @@
 import React from 'react';
 import NavBar from './components/navBar';
-import AllListings from './components/AllListings'
-import Listing from './components/Listing'
-import Search from './components/search'
+import AllListings from './components/Books/Listings/AllListings'
+import Listing from './components/Books/Listings/Listing'
+import Search from './components/Books/Listings/search'
 import {
     BrowserRouter as Router,
     Route,
@@ -10,11 +10,11 @@ import {
     Link
   } from "react-router-dom";
 import Home from './components/Home'
-import Login from './components/login';
+import Login from './components/Login/login';
 import Test from './components/Test';
-import AddBookForm from './components/addBookForm';
-import Register from './components/register';
-import EditBookForm from './components/EditBookForm'
+import AddBook from './components/Books/AddBook';
+import Register from './components/Login/register';
+import EditBook from './components/Books/EditBook'
 
 
 function App() {
@@ -30,9 +30,9 @@ function App() {
                 <Route path = "/login" element={<Login />}/>
                 <Route path = "/register" element={<Register />}/>
                 <Route path = "/search" element={<Search />} />
-                <Route path = "/listings/edit/:id" element={<EditBookForm />} />
+                <Route path = "/listings/edit/:id" element={<EditBook />} />
                 <Route path = "/test" element={<Test />} />
-                <Route path = "/listings/add" element={<AddBookForm />} />
+                <Route path = "/listings/add" element={<AddBook/>} />
             </ Routes>
         </div>
     );
