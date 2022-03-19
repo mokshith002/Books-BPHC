@@ -17,6 +17,7 @@ import Register from './components/Login/register';
 import EditBook from './components/Books/EditBook';
 import MyListings from './components/Books/Listings/MyListings';
 import AllUsers from './components/Users/AllUsers';
+import UserListings from './components/Users/UserListings'
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
                 <Route path = "/listings/add" element={<AddBook/>} />
                 <Route path = "/listings/my-listings" element={<MyListings />} />
                 <Route path = "/users" element={<AllUsers />} />
+                <Route path = "/users/listings/:id" element={<UserListings />} />
             </ Routes>
         </div>
     );

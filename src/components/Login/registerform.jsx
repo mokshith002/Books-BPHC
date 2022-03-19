@@ -6,6 +6,7 @@ export default function RegisterForm(params) {
 
     const submitRegister = () => {
         let mail = document.getElementById("regMail").value;
+        let name = document.getElementById("regName").value;
         let pass1 = document.getElementById("regPass1").value;
         let pass2 = document.getElementById("regPass2").value;
         let ph = document.getElementById("regPhone").value;
@@ -14,7 +15,7 @@ export default function RegisterForm(params) {
             alert("Passwords do not match!");
             return;
         }
-        axios.post(`${URL}/users/register`,{email:mail,password:pass1,phone:ph,address:addr})
+        axios.post(`${URL}/users/register`,{email:mail,name:name, password:pass1, phone:ph, address:addr})
         .then(res => {
             if(res.data.success){
                 localStorage.setItem("userId",res.data.userID);
@@ -33,6 +34,12 @@ export default function RegisterForm(params) {
         <div class="flex-shrink">
          <form>
                 <div class="row"> <h2>Register</h2> </div>
+
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Name</label>
+                    <input type="tel" class="form-control" id="regName" />
+                </div>
+
                 <div class="mb-3">
                     <label for="inputEmail1" class="form-label">Email address</label>
                     <input type="email" class="form-control" id="regMail" />

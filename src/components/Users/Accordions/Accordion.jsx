@@ -8,6 +8,7 @@ export default function AccordionDemo(props) {
     const {user, id} = props;
 
         const URL = `http://localhost:${5000}/users`;
+        const URL1 = `http://localhost:${3000}/users`;
 
 
     const handleDelete = async  () => {
@@ -31,6 +32,10 @@ export default function AccordionDemo(props) {
       }
       <Navigate to="/users"/>
     }
+
+    const handleViewListings = () => {
+       window.location.href = `${URL1}/listings/${user._id}`;
+    }
     
 
     return (
@@ -49,7 +54,7 @@ export default function AccordionDemo(props) {
                 <h5><strong>Role - </strong>{user.role}</h5>
                 <h5><strong>User ID - </strong>{user._id}</h5>
 
-                <button className="btn btn-primary mt-auto align-self-start">View Listings</button>
+                <button className="btn btn-primary mt-auto align-self-start" onClick={handleViewListings}>View Listings</button>
                 <button className="btn btn-success mt-auto align-self-start ms-5" onClick={handleRoleChange}>{user.role === 'User' ? "Make Moderator" : "Make User"}</button>
                 <button  className="btn btn-danger mt-auto align-self-end ms-5" onClick={handleDelete}>Delete</button>
                          
@@ -57,6 +62,5 @@ export default function AccordionDemo(props) {
               </div>
             </div>
           </div>
-        // </div>   
     )
 }

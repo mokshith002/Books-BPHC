@@ -34,7 +34,7 @@ exports.register = async (req, res) => {
         return;
     }
 
-    const { email, phone, address, password } = req.body;
+    const { email, name, phone, address, password } = req.body;
 
     let oldUser = null;
 
@@ -52,6 +52,7 @@ exports.register = async (req, res) => {
 
     const newUser = new User({
         email,
+        name,
         phone,
         role: "User",
         address,
