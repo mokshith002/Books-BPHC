@@ -1,10 +1,37 @@
-import React from "react";
+import React, {useState, useEffect, useRef} from "react";
 import Collapse from 'bootstrap';
-const { useState, useEffect, useRef } = React ;
+import axios from 'axios';
+import {Navigate} from 'react-router-dom';
 
 export default function AccordionDemo(props) {
 
     const {user, id} = props;
+
+        const URL = `http://localhost:${5000}/users`;
+
+
+    const handleDelete = async  () => {
+        try {
+            await axios.delete(`${URL}/delete/${user._id}`);
+            alert("Succesfully deleted")
+        } catch (error) {
+            alert(error.message)
+        }
+        <Navigate to="/users"/>
+    }
+
+    const handleRoleChange = async () => {
+      try{
+        await axios.put(`${URL}/update/${user._id}`, {
+          ...user,
+          role: user.role == 'User' ? 'Moderator' : 'User'
+        })
+      } catch(err){
+        alert(err.message)
+      }
+      <Navigate to="/users"/>
+    }
+    
 
     return (
         // <div class="accordion" id="accordionExample">
@@ -23,8 +50,8 @@ export default function AccordionDemo(props) {
                 <h5><strong>User ID - </strong>{user._id}</h5>
 
                 <button className="btn btn-primary mt-auto align-self-start">View Listings</button>
-                <button className="btn btn-success mt-auto align-self-start ms-5" >Make Moderator</button>
-                <button  className="btn btn-danger mt-auto align-self-end ms-5">Delete</button>
+                <button className="btn btn-success mt-auto align-self-start ms-5" onClick={handleRoleChange}>{user.role === 'User' ? "Make Moderator" : "Make User"}</button>
+                <button  className="btn btn-danger mt-auto align-self-end ms-5" onClick={handleDelete}>Delete</button>
                          
                         
               </div>

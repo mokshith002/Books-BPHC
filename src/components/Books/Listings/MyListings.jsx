@@ -40,12 +40,12 @@ export default function MyListings(){
     return(
         <div>
             <div class="row text-center" style={{ marginTop: 50, marginBottom:0}}>
-                <div className="col-12"><h2 class="">All Listings</h2></div>
+                <div className="col-12"><h2 class="">My Listings</h2></div>
             </div>
             <div class="text-center" style={{ marginTop: 20}}>
                 <a href='/listings/add' type="button" class="btn btn-dark col-1">Add Book</a>
             </div>
-            <CardHolder title="My Listings" cardData={cards}/>
+            <CardHolder cardData={cards}/>
         </div>
     )
 }
