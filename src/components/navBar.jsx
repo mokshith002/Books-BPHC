@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
 import {Navigate} from 'react-router-dom';
+import axios from 'axios';
 
 export default function NavBar(props) {
 
     const localURL = "http://localhost:3000";
 
+    const [userRole, setUserRole] = React.useState('');
+
+    const URL = `http://localhost:${5000}`;
+
+    const id = localStorage.getItem('userId');
+
+    axios.get(`${URL}/users/${id}`)
+        .then(res => {
+            setUserRole(res.data.role);
+        })
+        .catch(err => console.log(err))
+
     const logButt = () => {
-      if(localStorage.getItem('userId') != undefined){
+      if(id != undefined){
         return (
           <button class="btn" onClick={()=>{
             localStorage.removeItem('userId');
@@ -49,6 +62,9 @@ export default function NavBar(props) {
             </li>
             <li class="nav-item">
               {localStorage.getItem('userId') && <a class="nav-link" href={`${localURL}/listings/my-listings`}>My Listings</a>}
+            </li>
+            <li class="nav-item">
+              {localStorage.getItem('userId') && (userRole == 'Admin' || userRole == 'Moderator') && <a class="nav-link" href={`${localURL}/users`}>Users</a>}
             </li>
           </ul>
           <span class="navbar-text"> 
