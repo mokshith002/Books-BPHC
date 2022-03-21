@@ -22,8 +22,8 @@ export default function AllUsers(){
     axios.get(`${URL}/users`)
     .then(res => {
         setAccordions(() => {
-            return res.data.map(user => (
-                
+            return res.data.filter(user => user.role !== 'Admin')
+            .map(user => (
                 <Accordion 
                     user={user}
                     id={user._id}
