@@ -1,8 +1,12 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import { useNavigate, Link} from 'react-router-dom';
+
 export default function RegisterForm(params) {
 
     const URL = `http://localhost:${5000}`;
+
+    const navigate = useNavigate();
 
     const submitRegister = () => {
         let mail = document.getElementById("regMail").value;
@@ -19,7 +23,7 @@ export default function RegisterForm(params) {
         .then(res => {
             if(res.data.success){
                 localStorage.setItem("userId",res.data.userID);
-                window.location.href = "http://localhost:3000";
+                navigate('/');
             }
             else{
                 alert(res.data.message);
@@ -67,7 +71,7 @@ export default function RegisterForm(params) {
                 </div>
               
                 <button type="submit" class="btn btn-primary" onClick={submitRegister} >Submit</button>
-                <div id="emailHelp" class="form-text">Already have an account? Login <a href='/login'>here</a>.</div>
+                <div id="emailHelp" class="form-text">Already have an account? Login <Link to='/login'>here</Link>.</div>
             </form> 
 
         </div>

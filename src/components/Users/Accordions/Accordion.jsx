@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from "react";
 import Collapse from 'bootstrap';
 import axios from 'axios';
-import {Navigate} from 'react-router-dom';
+import {Navigate, useNavigate} from 'react-router-dom';
 
 export default function AccordionDemo(props) {
 
@@ -9,6 +9,8 @@ export default function AccordionDemo(props) {
 
         const URL = `http://localhost:${5000}/users`;
         const URL1 = `http://localhost:${3000}/users`;
+      
+        const navigate = useNavigate();
 
 
     const handleDelete = async  () => {
@@ -18,7 +20,7 @@ export default function AccordionDemo(props) {
         } catch (error) {
             alert(error.message)
         }
-        <Navigate to="/users"/>
+        navigate('/users');
     }
 
     const handleRoleChange = async () => {
@@ -30,11 +32,11 @@ export default function AccordionDemo(props) {
       } catch(err){
         alert(err.message)
       }
-      <Navigate to="/users"/>
+      navigate('/users')
     }
 
     const handleViewListings = () => {
-       window.location.href = `${URL1}/listings/${user._id}`;
+       navigate(`/users/listings/${user._id}`)
     }
     
 

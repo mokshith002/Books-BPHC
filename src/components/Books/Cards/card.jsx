@@ -6,8 +6,9 @@ import {Navigate, useNavigate} from 'react-router-dom';
 export default function Card(props) {
     const {title, author, courses, branches, price, listingId, sellerId} = props;
 
-    const URL = `http://localhost:${3000}/listings`;
-    const URL1 = `http://localhost:${5000}/listings`;
+    const URL = `http://localhost:${5000}/listings`;
+
+    const navigate = useNavigate();
     
     const links = {
         goTo: `${listingId}`,
@@ -16,16 +17,16 @@ export default function Card(props) {
 
     const handleDelete =async  () => {
         try {
-            await axios.delete(`${URL1}/delete/${listingId}`);
+            await axios.delete(`${URL}/delete/${listingId}`);
             alert("Succesfully deleted")
         } catch (error) {
             alert(error.message)
         }
-        <Navigate to="/listings"/>
+        navigate("/listings")
     }
 
     function handleNavigate(url){
-        window.location.href = `${URL}/${url}`;
+        navigate(`/listings/${url}`)
     }
 
     return (

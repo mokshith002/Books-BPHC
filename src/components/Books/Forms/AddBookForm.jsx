@@ -35,7 +35,7 @@ const EditBookForm = ()=> {
       ...formData,
       sellerId: localStorage.getItem('userId')
     }));
-    navigate(`../listings`);
+    navigate(`/listings/my-listings`);
   }
 
     

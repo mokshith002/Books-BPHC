@@ -1,9 +1,12 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function LoginForm() {
 
     const URL = `http://localhost:${5000}`;
+
+    const navigate = useNavigate();
 
     const submitLogin = () => {
         let Email = document.getElementById("logMail").value;
@@ -12,7 +15,7 @@ export default function LoginForm() {
             .then(res => {
                 if (res.data.success) {
                     localStorage.setItem("userId", res.data.userID);
-                    window.location.href = "http://localhost:3000";
+                    navigate('/');
                 }
                 else {
                     alert("Invalid credentials!");
@@ -43,7 +46,7 @@ export default function LoginForm() {
                 </div>
               
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <div id="emailHelp" class="form-text">Don't have an account? Register <a href='/register'>here</a>.</div>
+                <div id="emailHelp" class="form-text">Don't have an account? Register <Link to='/register'>here</Link>.</div>
             </form> 
 
     );
