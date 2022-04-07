@@ -22,7 +22,6 @@ import UserListings from './components/Users/UserListings'
 
 
 function App() {
-
     
     return ( 
         <div className = "App" >

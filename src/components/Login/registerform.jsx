@@ -9,6 +9,7 @@ export default function RegisterForm(params) {
     const navigate = useNavigate();
 
     const submitRegister = () => {
+
         let mail = document.getElementById("regMail").value;
         let name = document.getElementById("regName").value;
         let pass1 = document.getElementById("regPass1").value;
@@ -34,9 +35,14 @@ export default function RegisterForm(params) {
         );
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        submitRegister();
+    }
+
     return (
         <div class="flex-shrink">
-         <form>
+         <form onSubmit={handleSubmit}>
                 <div class="row"> <h2>Register</h2> </div>
 
                 <div class="mb-3">
@@ -70,7 +76,7 @@ export default function RegisterForm(params) {
                     <input type="password" class="form-control" id="regPass2" />
                 </div>
               
-                <button type="submit" class="btn btn-primary" onClick={submitRegister} >Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
                 <div id="emailHelp" class="form-text">Already have an account? Login <Link to='/login'>here</Link>.</div>
             </form> 
 
