@@ -37,7 +37,7 @@ function App() {
             })
             .catch(err => console.log(err))
 
-    })
+    }, [userId])
 
 
 
@@ -67,8 +67,9 @@ function App() {
       }
     };
 
-    function updateUserId(newId){
+    const updateUserId = (newId) => {
         setUserId(newId);
+        console.log('Working');
     }
     
     return ( 
