@@ -38,6 +38,18 @@ export default function AccordionDemo(props) {
     const handleViewListings = () => {
        navigate(`/users/listings/${user._id}`)
     }
+
+    const handleFlag = async () => {
+      try{
+        await axios.put(`${URL}/update/${user._id}`, {
+          ...user,
+          flagged: !user.flagged
+        })
+      }catch(err){
+        alert(err.message)
+      }
+      navigate('/users')
+    }
     
 
     return (
@@ -57,8 +69,9 @@ export default function AccordionDemo(props) {
                 <h5><strong>User ID - </strong>{user._id}</h5>
 
                 <button className="btn btn-primary mt-auto align-self-start" onClick={handleViewListings}>View Listings</button>
-                <button className="btn btn-success mt-auto align-self-start ms-5" onClick={handleRoleChange}>{user.role === 'User' ? "Make Moderator" : "Make User"}</button>
-                <button  className="btn btn-danger mt-auto align-self-end ms-5" onClick={handleDelete}>Delete</button>
+               {props.userRole === 'Admin' && <button className="btn btn-success mt-auto align-self-start ms-5" onClick={handleRoleChange}>{user.role === 'User' ? "Make Moderator" : "Make User"}</button>}
+               {props.userRole === 'Admin' && <button  className="btn btn-danger mt-auto align-self-end ms-5" onClick={handleDelete}>Delete</button>}
+               {(props.userRole === 'Moderator'|| props.userRole === 'Admin') && <button  className="btn btn-warning mt-auto align-self-end ms-5" onClick={handleFlag}>{user.flagged ? "Unflag" : "Flag"}</button>}
                          
                         
               </div>

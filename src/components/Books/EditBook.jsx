@@ -6,29 +6,30 @@ import {useParams, Navigate} from "react-router-dom";
 import WrongUser from '../AuthFail/WrongUser'
 import NotLoggedIn from '../AuthFail/NotLoggedIn';
 
-const EditBook = () => {
+export default function EditBook(props) {
 
     const ID = useParams().id;
 
     const URL = `http://localhost:${5000}`;
 
     const [authorized, setAuthorized] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    
   
     useEffect(() => {
       axios.get(`${URL}/listings/${ID}`)
       .then(res => {
-        const state = (res.data.sellerId === localStorage.getItem('userId'));
+        const state = res.data.sellerId === props.userId || props.userRole === 'Admin' || props.userRole === 'Moderator';
         setAuthorized(state);
+        setIsLoading(false);
       })
       .catch(err => {
         setAuthorized(false);
       })
+      isLoading ? console.log("Loading...") : console.log(`Authorized - ${authorized}`);
+    })
 
-      console.log(authorized);
-    }, [])
-
+    if(isLoading) return <></>
 
     return authorized ? <EditBookForm /> : localStorage.getItem('userId') ? <WrongUser /> : <NotLoggedIn />
 }
-
-export default EditBook;

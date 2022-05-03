@@ -2,11 +2,13 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-export default function LoginForm() {
+export default function LoginForm(props) {
 
     const URL = `http://localhost:${5000}`;
 
     const navigate = useNavigate();
+
+    const changeLogin = (id) => props.handleLogin(id);
 
     const submitLogin = () => {
         let Email = document.getElementById("logMail").value;
@@ -15,6 +17,8 @@ export default function LoginForm() {
             .then(res => {
                 if (res.data.success) {
                     localStorage.setItem("userId", res.data.userID);
+                    console.log("In login form ", res.data.userID);
+                    changeLogin(res.data.userID);
                     navigate('/');
                 }
                 else {

@@ -3,7 +3,7 @@ import React from 'react';
 import Card from '../Cards/card';
 import CardHolder from '../Cards/cardholder'
 
-export default function AllListings(){
+export default function AllListings(props){
     const [cards, setCards] = React.useState([]);
 
     const URL = `http://localhost:${5000}`;
@@ -21,6 +21,7 @@ export default function AllListings(){
                         price={card.price}
                         listingId={card._id}
                         sellerId={card.sellerId}
+                        userRole = {props.userRole}
                     />
                 </div>
             ))

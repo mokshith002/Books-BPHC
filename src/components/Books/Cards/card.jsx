@@ -43,7 +43,7 @@ export default function Card(props) {
                     <p className="card-branches">{branches} </p>
                     <div>
                         <button className="btn btn-success mt-auto align-self-start"onClick={() => handleNavigate(links.goTo)}>Go to Page</button>
-                        {   sellerId === localStorage.getItem('userId') &&
+                        {   (sellerId === props.userId || props.userRole == 'Admin' || props.userRole == 'Moderator') &&
                             <span>
                                 <button className="btn btn-primary mt-auto align-self-start ms-5" onClick={() => handleNavigate(links.edit)}>Edit</button>
                                 <button onClick={handleDelete} className="btn btn-danger mt-auto align-self-end ms-5">Delete</button>

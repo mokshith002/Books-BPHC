@@ -56,7 +56,8 @@ exports.register = async (req, res) => {
         phone,
         role: "User",
         address,
-        password: hashedPassword
+        password: hashedPassword,
+        flagged: false
     });
 
     newUser.save()

@@ -4,7 +4,7 @@ import Card from '../Cards/card';
 import CardHolder from '../Cards/cardholder'
 import NotLoggedIn from '../../AuthFail/NotLoggedIn';
 
-export default function MyListings(){
+export default function MyListings(props){
     const [cards, setCards] = React.useState([]);
 
     const URL = `http://localhost:${5000}`;
@@ -31,6 +31,7 @@ export default function MyListings(){
                         price={card.price}
                         listingId={card._id}
                         sellerId={card.sellerId}
+                        userId = {props.userId}
                     />
                 </div>
             ))

@@ -4,42 +4,7 @@ import axios from 'axios';
 
 export default function NavBar(props) {
 
-  
-    const [userRole, setUserRole] = React.useState('');
-
-    const URL = `http://localhost:${5000}`;
-
-    const id = localStorage.getItem('userId');
-
-    const navigate = useNavigate();
-
-    axios.get(`${URL}/users/${id}`)
-        .then(res => {
-            setUserRole(res.data.role);
-        })
-        .catch(err => console.log(err))
-
-    const logButt = () => {
-      if(id != undefined){
-        return (
-          <button class="btn" onClick={()=>{
-            localStorage.removeItem('userId');
-            navigate('/');
-          }}>
-            LOGOUT
-          </button>
-        );
-      }else{
-        return (
-          <button class="btn" onClick={()=>{
-            navigate('/login');
-          }}>
-            LOGIN
-          </button>
-        );
-      }
-    };
-
+   
     return (
 
     <div>  
@@ -64,14 +29,14 @@ export default function NavBar(props) {
               <Link  style={{textDecoration:'none', color: "#000"}}to="/listings">All Listings</Link>
             </li>
             <li class="nav-item nav-link">
-              {localStorage.getItem('userId') && <Link  style={{textDecoration:'none', color: "#000"}}to="/listings/my-listings">My Listings</Link>}
+              {props.userId && <Link  style={{textDecoration:'none', color: "#000"}}to="/listings/my-listings">My Listings</Link>}
             </li>
             <li class="nav-item nav-link">
-              {localStorage.getItem('userId') && (userRole == 'Admin' || userRole == 'Moderator') && <Link  style={{textDecoration:'none', color: "#000"}}to="/users">Users</Link>}
+              {props.userId && (props.userRole == 'Admin' || props.userRole == 'Moderator') && <Link  style={{textDecoration:'none', color: "#000"}}to="/users">Users</Link>}
             </li>
           </ul>
           <span class="navbar-text"> 
-              {logButt()}
+              {props.logToggle()}
           </span>
         </div>
       </div>

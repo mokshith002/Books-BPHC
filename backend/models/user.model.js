@@ -38,7 +38,8 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    address: String
+    address: String,
+    flagged: Boolean
 });
 
 const User = mongoose.model('User', userSchema);

@@ -6,7 +6,7 @@ export default function Login(props) {
     return(
         <div class='d-flex p-3 justify-content-center align-items-center' style={{height: "70vh"}}>
 
-                <LoginForm/>
+                <LoginForm handleLogin = {props.handleLogin}/>
           
         </div>
     )
